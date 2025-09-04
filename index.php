@@ -6,6 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+    <ul>
+        <li>
+            <a href='/variable'>Переменные</a>
+        </li>
+         <li>
+            <a href='/loops'>Циклы</a>
+        </li>
+    </ul>
+
     <?php
         echo rand(0, 1000);
     ?>
