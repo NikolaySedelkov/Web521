@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import { increment } from "./store/slices/counterSlice";
 import Bonus from "./components/Bonus/Bonus";
+import React, { useEffect } from "react";
+import { setUser } from "./store/slices/userSlice";
+import Header from "./components/Header/Header";
 
 function App() {
   // Достать значение из Redux - хук useSelector
@@ -20,8 +23,20 @@ function App() {
   // И ТОЛЬКО ЧЕРЕЗ НЕЁ
   const dispatch = useDispatch();
 
+  useEffect(
+    () => {
+      getUser()
+        .then(
+          user => {
+            dispatch(setUser(user))
+          }
+        )
+    }, []
+  );
+
   return (
     <>
+      <Header/>
       <Bonus/>
       <div 
         style={{
@@ -41,6 +56,23 @@ function App() {
         </button>
       </div>
     </>
+  )
+}
+
+function getUser() {
+  return new Promise(
+    // Дейтвие, которое будет отложено
+    // В функции не должно быть return
+
+    // Результ функции пробрасываем в специальные функции resolve, reject
+    // resolve - указание на то, что действие выполнилось удачно
+    // reject - указание на то, что действие выполнилось не удачно
+    (resolve, reject) => {
+      resolve({
+        name: 'Николай',
+        surname: 'Седелков'
+      })
+    } 
   )
 }
 
