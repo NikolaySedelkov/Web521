@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
-import { increment } from "./store/slices/counterSlice";
+import { decrement, increment } from "./store/slices/counterSlice";
 import Bonus from "./components/Bonus/Bonus";
 import React, { useEffect } from "react";
 import { setUser } from "./store/slices/userSlice";
 import Header from "./components/Header/Header";
+import { stepSec } from "./store/slices/timerSlice";
 
 function App() {
   // Достать значение из Redux - хук useSelector
@@ -34,6 +35,17 @@ function App() {
     }, []
   );
 
+  useEffect(
+    () => {
+      const id = setInterval(() => {
+        dispatch(stepSec());
+      }, 1000);
+      return () => {
+        clearInterval(id);
+      }
+    }
+  )
+
   return (
     <>
       <Header/>
@@ -43,7 +55,15 @@ function App() {
             display: 'flex' 
         }}
       >
-        <button>-</button>
+        <button
+          onClick={
+            () => {
+              dispatch(decrement())
+            }
+          }
+        >
+          -
+        </button>
         <b>{count}</b>
         <button
           onClick={

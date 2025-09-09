@@ -18,6 +18,10 @@ const counterSlice = createSlice({
             state.value += 1;
         },
 
+        decrement(state) {
+            state.value -= 1;
+        },
+
         incrementByAmount(state, action) {
             // payload - значение, которое передаем в действие
             state.value += action.payload;
@@ -31,5 +35,6 @@ export default counterSlice.reducer;
 // Отдельный экспорт всех действий над данными
 export const {
     increment,
-    incrementByAmount
+    incrementByAmount,
+    decrement
 } = counterSlice.actions;
