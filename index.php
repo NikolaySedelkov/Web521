@@ -10,8 +10,11 @@
         <li>
             <a href='/variable'>Переменные</a>
         </li>
-         <li>
+        <li>
             <a href='/loops'>Циклы</a>
+        </li>
+        <li>
+            <a href='/array'>Массивы</a>
         </li>
     </ul>
 
