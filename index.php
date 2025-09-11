@@ -6,34 +6,114 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>ООП</h1>
+    <b>ООП</b> - <b>О</b>бъектно <b>О</b>риентированное <b>П</b>рограммирование, 
+    программирование ориентированное на объектах
+
+    Объект - Набор свойств
+
+    <hr/>
+
+    <h2>СТруктуризация</h2>
+
+    Первое что нужно(приходится) делать в рамках ООП, выделять объекты, которые присутвуют в алгоритмах
+
+    // Пример: программы, графического илюстратора, простенький, рисуем только прямыми линиями
+    Рещение: Выделяем 2 структуры
+    <ol>
+        <li>
+            Точка - состоящая из
+            <ul>
+                <li>x - Горизонтальной координаты</li> 
+                <li>y - Вертикальной координаты</li> 
+            </ul>
+        </li>
+
+        <li>
+            Линия - состоящая из
+            <ul>
+                <li>p1 - Точка начала</li> 
+                <li>p2 - Точка конца</li> 
+                <li>w - ширина</li> 
+                <li>color - цвет</li> 
+            </ul>
+        </li>
+
+        <li>
+            Картинка - состоящая из
+            <ul>
+                <li>lines - Набор(массив) линий</li> 
+            </ul>
+        </li>
+    </ol>
+
+    // Для того, что бы создать структуру использовальется следующий синтаксис
+    <pre>
+        <code>
+class NAME_STRUCT {
+    public TYPE $NAME_FIELD1;
+    public TYPE $NAME_FIELD2;
+    public TYPE $NAME_FIELD3;
+    ...
+}
+        </code>
+    </pre>
+
     <ul>
         <li>
-            <a href='/variable'>Переменные</a>
+            NAME_STRUCT - название структуры
         </li>
+
         <li>
-            <a href='/loops'>Циклы</a>
+            NAME_FIELD_I - название поля структуры(составная часть)
         </li>
+
         <li>
-            <a href='/array'>Массивы</a>
-        </li>
-        <li>
-            <a href='/array/object'>Ассоциативные массивы</a>
+            TYPE - Тип поля структуры(int, string, ...)
         </li>
     </ul>
 
     <?php
-        echo rand(0, 1000);
+        class Point {
+            public int $x;
+            public int $y;
+        } 
+
+        // Примеры использования
+
+        // СОздание переменной, которая будет является структурой, описанной классом Point
+        $example_point = new Point();
+
+        // Работа с полями структуры: STRUCT->NAME_FIELD
+        $example_point->x = 100;
+        $example_point->y = 9;
     ?>
 
-    <h1>
-        <?php
-            $left_bounc = rand(0, 1000);
-            echo $left_bounc;
-            echo '-';
-            echo rand($left_bounc, 2 * $left_bounc);
-        ?>
-    </h1>
-    <a href="/contacts">контакты</a>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero alias voluptates provident quaerat at quisquam eligendi exercitationem animi officiis cumque, totam vero repellat, qui porro iure distinctio tenetur soluta! Assumenda!
+    <?php
+        class Line {
+            public Point $p1;
+            public Point $p2;
+
+            public int $weight;
+            public string $color;
+        } 
+
+        $example_line = new Line();
+
+        $example_line->weight = 2;
+        $example_line->color = 'red';
+
+        $example_line->p1 = new Point();
+        $example_line->p1->x = 44;
+        $example_line->p1->y = -44;
+
+        $example_line->p2 = $example_point;
+    ?>
+
+    <?php
+        class Canvas {
+            public array $lines;
+        } 
+    ?>
 </body>
 </html>
