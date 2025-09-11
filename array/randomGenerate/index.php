@@ -11,6 +11,9 @@
             $result,
             rand($min, $max) 
         );
+
+        // Добавить элемент в конец
+        // $result[] = rand($min, $max);
     }
 
 ?>
