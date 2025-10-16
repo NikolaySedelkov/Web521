@@ -19,7 +19,11 @@ Route::name("actor.")->prefix("actor")->group(function() {
      * Path-paramert(variable) - параметры, которые передаются в запросах в виде части пути
      */
     Route::get("/{id}", function(int $id) {
-        
+        $response = Http::get(route("api.actor.index", ["id" => $id]));
+
+        if($response->ok()) {
+            return view("actor.index", ["user" => $response->json()]);
+        }
 
         return "Oops";
     })->name("index"); // name=actor.index <-> prefix + name
@@ -34,7 +38,7 @@ Route::name("city.")->prefix("city")->group(function() {
         $response = Http::get(route("api.city.index", ["id" => $id]));
 
         if($response->ok()) {
-            return view("city.index", ["user" => $response->json()]);
+            return json_encode($response->json());
         }
 
         return "Oops";
@@ -91,7 +95,7 @@ Route::name("api.")->prefix("api")->group(function () {
             ];
 
             if(array_key_exists($id, $users)) {
-                return view("actor.index", ['user' => $users[$id]]);
+                return json_encode($users[$id]);
             }
 
             abort(403);
@@ -112,7 +116,7 @@ Route::name("api.")->prefix("api")->group(function () {
             ];
 
             if(array_key_exists($id, $cities)) {
-                return view("city.index", ['city' => $cities[$id]]);
+                return json_encode($cities[$id]);
             }
 
             abort(403);
