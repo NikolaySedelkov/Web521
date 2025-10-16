@@ -1,6 +1,11 @@
-<h1>Список актеров</h1>
+@extends('templates.main')
 
-<ul>
-    <li><a href="{{ route("actor.index", ["id" => 1]) }}">Данила Козловский</a></li>
-    <li><a href="{{ route("actor.index", ["id" => 2]) }}">Джони Депп</a></li>
-</ul>
+@section('title', 'Список актеров')
+@section('header', 'Список актеров')
+
+@section('content')
+    <ul>
+        <li><a href="{{ route("actor.index", ["id" => 1]) }}">Данила Козловский</a></li>
+        <li><a href="{{ route("actor.index", ["id" => 2]) }}">Джони Депп</a></li>
+    </ul>
+@endsection
