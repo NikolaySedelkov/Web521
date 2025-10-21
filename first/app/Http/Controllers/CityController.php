@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
 
 class CityController extends Controller {
     static $cities = [
@@ -30,14 +31,10 @@ class CityController extends Controller {
     }
 
     public function getCities() {
-        return CityController::$cities;
+        return City::all();
     }
 
     public function getCity($id) {
-        if(array_key_exists($id, CityController::$cities)) {
-            return CityController::$cities[$id];
-        }
-
-        return null;
+        return City::find($id);
     }
 }

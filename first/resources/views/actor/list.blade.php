@@ -5,7 +5,13 @@
 
 @section('content')
     <ul>
-        <li><a href="{{ route("actor.index", ["id" => 1]) }}">Данила Козловский</a></li>
-        <li><a href="{{ route("actor.index", ["id" => 2]) }}">Джони Депп</a></li>
+        @foreach ($actors as $actor)
+            <li>
+                <a href="{{ route("actor.index", ["id" => $actor['actor_id']]) }}">
+                    {{ $actor['first_name'] }} {{ $actor['last_name'] }}
+                </a>
+            </li>
+        @endforeach
+
     </ul>
 @endsection

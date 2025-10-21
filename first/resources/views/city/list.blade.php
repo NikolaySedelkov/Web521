@@ -1,6 +1,11 @@
 <h1>Список городов</h1>
 
 <ul>
-    <li><a href="{{ route("city.index", ["id" => 1]) }}">Вологда</a></li>
-    <li><a href="{{ route("city.index", ["id" => 2]) }}">Кингисепп</a></li>
+    @foreach ($cities as $city)
+        <li>
+            <a href="{{ route("city.index", ["id" => $city['city_id']]) }}">
+                {{$city['city']}}
+            </a>
+        </li>  
+    @endforeach
 </ul>
