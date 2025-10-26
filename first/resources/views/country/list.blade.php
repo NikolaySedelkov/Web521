@@ -1,7 +1,7 @@
 @extends('templates.main')
 
-@section('title', 'Список городов')
-@section('header', 'Список городов')
+@section('title', 'Список стран')
+@section('header', 'Список стран')
 
 @section('content')
     <a href="{{route('country.add')}}"> Добавить </a>

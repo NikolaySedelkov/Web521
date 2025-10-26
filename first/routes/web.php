@@ -27,6 +27,7 @@ Route::name('country.')->prefix("country")->group(function() {
     Route::get("/", [CountryController::class, 'showList'])->name('list');
     Route::get("/add", [CountryController::class, 'showAddCountry'])->name('add');
     Route::get("/{id}", [CountryController::class, 'showCountry'])->name('index');
+    Route::get("/{id}/update", [CountryController::class, 'showUpdateCountry'])->name('update');
 });
 
 Route::name("city.")->prefix("city")->group(function() {
@@ -54,6 +55,8 @@ Route::name("api.")->prefix("api")->group(function () {
 
     Route::name('country.')->prefix('country')->group(function () {
         Route::post('/add', [CountryController::class, 'addCountry'])->name('add');
+        Route::put('/{id}', [CountryController::class, 'updateCountry'])->name('update');
+        Route::delete('/{id}', [CountryController::class, 'deleteCountry'])->name('delete');
     });
 
     Route::name("city.")->prefix("city")->group(function() {
