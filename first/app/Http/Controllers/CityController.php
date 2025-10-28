@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\City;
+use Illuminate\Http\Request;
 
 class CityController extends Controller {
     static $cities = [
@@ -71,5 +72,10 @@ class CityController extends Controller {
 
     public function getCity($id) {
         return City::find($id);
+    }
+
+    public function deleteCity(Request $request) {
+        $id = $request->input("id");
+        return City::query()->whereRaw("city_id = ?", [$id])->delete();
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActorController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use Illuminate\Http\Request;
@@ -9,9 +10,14 @@ use Illuminate\Http\Request;
  * Route->name - Функция присваивает название(якорь) для роута, для дальнейшнего обращение(получение)
  * к ссылку по наименованию
  */
-Route::get("/", function() {
-    return view("start");
-})->name("home");
+
+Route::middleware('auth')->group(function() {
+    Route::get("/", function() {
+        return view("start");
+    })->name("home");
+});
+
+Route::get('auth/login', [AuthController::class, 'showLogin'])->name('login');
 
 // GLOBAL_NAME
 Route::name("actor.")->prefix("actor")->group(function() {
@@ -38,6 +44,9 @@ Route::name("city.")->prefix("city")->group(function() {
     Route::get("/{id}", [CityController::class, 'showCity'])->name("index");
 });
 
+Route::name("auth.")->prefix("auth")->group(function() {
+    Route::get("/register", [AuthController::class, 'showRegister'])->name('register');
+});
 
 Route::name("api.")->prefix("api")->group(function () {
     Route::name("actor.")->prefix("actor")->group(function() {
@@ -51,6 +60,12 @@ Route::name("api.")->prefix("api")->group(function () {
 
             abort(403);
         });
+    });
+
+    Route::name("auth.")->prefix("auth")->group(function() {
+        Route::get("/register", [AuthController::class, 'register'])->name('register');
+        Route::get("/login", [AuthController::class, 'login'])->name('login');
+        Route::get("/logout", [AuthController::class, 'logout'])->name('logout');
     });
 
     Route::name('country.')->prefix('country')->group(function () {
@@ -69,6 +84,8 @@ Route::name("api.")->prefix("api")->group(function () {
             
             return json_encode($cities);      
            })->name("list");
+
+        Route::delete("/", [CityController::class, 'deleteCity'])->name('delete');
 
         Route::get("/{id}", function(int $id) {
             $controller = new CityController();
