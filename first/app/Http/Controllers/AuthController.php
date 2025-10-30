@@ -44,7 +44,7 @@ class AuthController extends Controller
             ->where('email', $data['email'])
             ->first();
 
-        if(Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+        if(Auth::attempt($data)) {
             $request->session()->regenerate();
 
             return redirect(route('home'));

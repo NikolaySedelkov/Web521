@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CountryController;
 use Illuminate\Http\Request;
+use TCG\Voyager\Facades\Voyager;
 
 /**
  * Route->name - Функция присваивает название(якорь) для роута, для дальнейшнего обращение(получение)
@@ -98,4 +99,8 @@ Route::name("api.")->prefix("api")->group(function () {
             abort(403);
         })->name("index");
     });
+});
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
 });

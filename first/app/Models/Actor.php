@@ -11,4 +11,5 @@ class Actor extends Model
 
     protected $table = 'actor';
     protected $primaryKey = 'actor_id';
+    public $timestamps = false;
 }
